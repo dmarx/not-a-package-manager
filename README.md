@@ -1,6 +1,8 @@
 # not-a-package-manager
 utilities to facilitate working with codebases that don't ascribe to normal package management paradigms, e.g. ML research code that can be cloned but not installed.
 
+**DISCLAIMER:** This tool encapsulates what could be considered "best practices" for... bad practices. Simply invoking this package should probably be considered a code smell and shouldn't come anywhere near production code.
+
 # Installation
 
 This will be pushed to PyPI when it's... "ready". For the time being:
@@ -12,7 +14,44 @@ This will be pushed to PyPI when it's... "ready". For the time being:
 
 # Usage
 
+To "install" a codebase from a git repo:
+
+    import napm
+
     url = "https://github.com/crowsonkb/cloob-training"
     napm.pseudoinstall_git_repo(url, package_name='cloob')
 
     import cloob
+
+After installation, importing napm will make the "installed" packages available again
+
+    import napm
+    import cloob
+
+
+# Who is this for?
+
+If you are "installing" pacakages using code that looks something like:
+
+    try:
+        import packageName
+    except:
+        !git clone https://github.com/publisher/packageName
+        import sys
+        sys.path.append('.')
+
+this tool is intended to replace that sort of thing.
+
+# How it works
+
+The tool assigns a subdirectory of the user's cache as the download location for codebases that need to be imported but can't be installed.
+"Installing" then clones the target git repo into this subdirectory if it doesn't already exist. Code "installed" in this way will now be available
+to any python environment into which napm is installed. 
+
+# Why is this better?
+
+* Keeps your PYTHON_PATH variable clean
+* Importing tools will no longer be sensitive or contingent on the current working directory
+* Frequently reused dependencies won't need to be downloaded repeated
+* You won't need to have multiple copies of the same codebase sprinkled all over your system
+
