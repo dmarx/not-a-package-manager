@@ -23,24 +23,24 @@ from .utils import gitclone
 
 
 
-def resolve_dapm_path() -> str:
+def resolve_napm_path() -> str:
     """
     Returns the parent direectory into which dapm will "install" "pacakages"
     """
     # TO DO: better internal jargon to replace scarequotes
     # Todo: after first resolve, persist this to a config file or something like that and load from there. 
-    dapm_path = os.environ.get('DAPM_PATH')
-    if dapm_path is None:
+    napm_path = os.environ.get('NAPM_PATH')
+    if napm_path is None:
         cache_dir = Path.home() / '.cache'
-        dapm_path = (cache_dir / 'dapm').resolve()
-    return str(dapm_path)
+        napm_path = (cache_dir / 'napm').resolve()
+    return str(napm_path)
 
 
 def make_install_dir(dirname) -> str:
     """
     Creates the directory into which the package will be "installed".
     """
-    parent = resolve_dapm_path()
+    parent = resolve_napm_path()
     install_dir = Path(parent) / dirname
     if not install_dir.exists():
         install_dir.mkdir(parents=True)
