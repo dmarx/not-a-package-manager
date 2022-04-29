@@ -45,8 +45,9 @@ to any python environment into which napm is installed.
 
 # Why is this better?
 
+* Replaces certain patterns that can lead to bug-prone code
 * Keeps your PYTHON_PATH variable clean
-* Importing tools will no longer be sensitive or contingent on the current working directory
+* Importing tools will no longer be sensitive to or contingent on the current working directory
 * Frequently reused dependencies won't need to be downloaded repeated
 * You won't need to have multiple copies of the same codebase sprinkled all over your system
 
