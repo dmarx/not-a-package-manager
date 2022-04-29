@@ -34,7 +34,10 @@ def resolve_napm_path() -> str:
         cache_dir = Path.home() / '.cache'
         napm_path = (cache_dir / 'napm').resolve()
         napm_path.mkdir(parents=True, exist_ok=True)
-    return str(napm_path)
+    napm_path = str(napm_path)
+    if napm_path not in sys.path:
+        sys.path.append(napm_path)
+    return napm_path
 
 
 def make_install_dir(dirname) -> str:
@@ -58,12 +61,17 @@ def pseudoinstall_git_repo(package_url, install_dir=None, package_name=None):
         install_dir = make_install_dir(package_name)
     
     gitclone(package_url, install_dir)
-    sys.path.append(install_dir)
-    logger.debug(f"Added {install_dir} to sys.path")
 
     # test install was successful
     try:
         importlib.import_module(package_name)
     except ImportError as e:
-        logger.error(f"Failed to import {package_name}, dapm 'install' failed")
-        raise e
+        logger.error(f'{package_name} failed to import from dapm install dir')
+        sys.path.append(install_dir)
+        logger.debug(f"Added {install_dir} to sys.path")
+
+        try:
+            importlib.import_module(package_name)
+        except ImportError as e:
+            logger.error(f"Failed to import {package_name}, napm 'install' failed")
+            raise e
