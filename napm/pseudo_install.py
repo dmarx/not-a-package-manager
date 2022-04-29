@@ -33,6 +33,7 @@ def resolve_napm_path() -> str:
     if napm_path is None:
         cache_dir = Path.home() / '.cache'
         napm_path = (cache_dir / 'napm').resolve()
+        napm_path.mkdir(parents=True, exist_ok=True)
     return str(napm_path)
 
 
