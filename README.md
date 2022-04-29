@@ -5,12 +5,7 @@ utilities to facilitate working with codebases that don't ascribe to normal pack
 
 # Installation
 
-This will be pushed to PyPI when it's... "ready". For the time being:
-
-    !pip install poetry
-    !git clone https://github.com/dmarx/not-a-package-manager
-    !cd not-a-package-manager; git pull origin; poetry build
-    !pip uninstall -y napm; pip install not-a-package-manager/dist/napm*.whl
+    pip install napm
 
 # Usage
 
@@ -54,4 +49,11 @@ to any python environment into which napm is installed.
 * Importing tools will no longer be sensitive or contingent on the current working directory
 * Frequently reused dependencies won't need to be downloaded repeated
 * You won't need to have multiple copies of the same codebase sprinkled all over your system
+
+# Dev installation
+
+    !pip install poetry
+    !git clone https://github.com/dmarx/not-a-package-manager
+    !cd not-a-package-manager; git pull origin; poetry build
+    !pip uninstall -y napm; pip install not-a-package-manager/dist/napm*.whl
 
