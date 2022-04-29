@@ -23,6 +23,14 @@ After installation, importing napm will make the "installed" packages available 
     import napm
     import cloob
 
+The default behavior is to not add the root dir of the git repo to the PYTHON_PATH. If you need this additional step, you can specify it like this:
+
+    import napm
+    url = 'https://github.com/facebookresearch/SLIP'
+    napm.pseudoinstall_git_repo(url, add_install_dir_to_path=True)
+
+    import SLIP
+    from SLIP.models import SLIP_VITB16, SLIP, SLIP_VITL16
 
 # Who is this for?
 
