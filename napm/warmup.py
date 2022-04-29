@@ -5,14 +5,15 @@ from loguru import logger
 
 def populate_pythonpaths():
     """
-    If packages have been previously "installed" with dapm, this will add the "install" directories to the python path.
+    If packages have been previously "installed" with napm, this will add the "install" directories to the python path.
     """
     napm_path = Path(resolve_napm_path())
-    for subdir in napm_path.iterdir():
-        if subdir.is_dir():
-            subdir = str(subdir.resolve())
-            logger.debug(subdir)
-            sys.path.append(subdir)
+    sys.path.append(napm_path)
+    #for subdir in napm_path.iterdir():
+    #    if subdir.is_dir():
+    #        subdir = str(subdir.resolve())
+    #        logger.debug(subdir)
+    #        sys.path.append(subdir)
 
 if __name__ == "__main__":
     populate_pythonpaths()
