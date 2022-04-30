@@ -33,7 +33,7 @@ def gitclone(
 # TO DO: check for an enviroment variable that can be used to override the install directory
 
 
-def resolve_napm_path() -> str:
+def resolve_napm_path(env_name=None) -> str:
     """
     Returns the parent direectory into which napm will "install" "pacakages"
     """
@@ -42,6 +42,8 @@ def resolve_napm_path() -> str:
     napm_path = os.environ.get('NAPM_PATH')
     if napm_path is None:
         cache_dir = Path.home() / '.cache'
+        if env_name:
+            cache_dir = cache_dir / '_envs' / env_name
         napm_path = (cache_dir / 'napm').resolve()
         napm_path.mkdir(parents=True, exist_ok=True)
     napm_path = str(napm_path)
