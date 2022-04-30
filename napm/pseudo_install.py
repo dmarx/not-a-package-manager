@@ -54,7 +54,12 @@ def make_install_dir(dirname) -> str:
     return install_dir
 
 
-def pseudoinstall_git_repo(package_url, install_dir=None, package_name=None):
+def pseudoinstall_git_repo(
+    package_url, 
+    install_dir=None, 
+    package_name=None,
+    add_install_dir_to_path=False,
+    ):
     if not package_name:
         package_name = package_url.split('/')[-1]
     if not install_dir:
@@ -67,11 +72,14 @@ def pseudoinstall_git_repo(package_url, install_dir=None, package_name=None):
         importlib.import_module(package_name)
     except ImportError as e:
         logger.error(f'{package_name} failed to import from dapm install dir')
+        add_install_dir_to_path = True
+
+    if add_install_dir_to_path:
         sys.path.append(install_dir)
         logger.debug(f"Added {install_dir} to sys.path")
 
-        try:
-            importlib.import_module(package_name)
-        except ImportError as e:
-            logger.error(f"Failed to import {package_name}, napm 'install' failed")
-            raise e
+    try:
+        importlib.import_module(package_name)
+    except ImportError as e:
+        logger.error(f"Failed to import {package_name}, napm 'install' failed")
+        raise e
