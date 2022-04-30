@@ -35,7 +35,7 @@ def gitclone(
 
 def resolve_napm_path() -> str:
     """
-    Returns the parent direectory into which dapm will "install" "pacakages"
+    Returns the parent direectory into which napm will "install" "pacakages"
     """
     # TO DO: better internal jargon to replace scarequotes
     # Todo: after first resolve, persist this to a config file or something like that and load from there. 
