@@ -8,36 +8,7 @@ import sys
 
 import importlib
 
-from .utils import gitclone
-
-#install_dir = Path(__path__)
-#local_path = Path.cwd() 
-
-# to do: add a database (maybe just a text file) to track mappings from package name to install dir
-
-
-#Path.expanduser()
-
-# TO DO: check for an enviroment variable that can be used to override the install directory
-
-
-
-
-def resolve_napm_path() -> str:
-    """
-    Returns the parent direectory into which dapm will "install" "pacakages"
-    """
-    # TO DO: better internal jargon to replace scarequotes
-    # Todo: after first resolve, persist this to a config file or something like that and load from there. 
-    napm_path = os.environ.get('NAPM_PATH')
-    if napm_path is None:
-        cache_dir = Path.home() / '.cache'
-        napm_path = (cache_dir / 'napm').resolve()
-        napm_path.mkdir(parents=True, exist_ok=True)
-    napm_path = str(napm_path)
-    if napm_path not in sys.path:
-        sys.path.append(napm_path)
-    return napm_path
+from .utils import gitclone, resolve_napm_path
 
 
 def make_install_dir(dirname) -> str:
