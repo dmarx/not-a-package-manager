@@ -1,14 +1,36 @@
-from .pseudo_install import resolve_napm_path 
 from pathlib import Path
 import sys
+
 from loguru import logger
 
-def populate_pythonpaths():
+from .pseudo_install import resolve_napm_path 
+from .config import NapmConfig
+
+def populate_pythonpaths(
+    env_name=None,
+):
     """
     If packages have been previously "installed" with napm, this will add the "install" directories to the python path.
     """
+    napm_paths = []
     napm_path = Path(resolve_napm_path())
-    sys.path.append(napm_path)
+    napm_paths.append(napm_path)
+    if env_name:
+        env_path = napm_path / env_name
+        napm_paths.append(env_path)
+
+    config = NapmConfig(env_name=env_name).load()
+    for package_name, package_meta in config.packages.items():
+        if package_meta.add_install_dir_to_path:
+            package_path = package_meta['install_dir']
+            napm_paths.append(package_path)
+
+    for path in napm_paths:
+        if isinstance(path, Path):
+            path = str(path.resolve())
+        if path not in sys.path:
+            sys.path.append(path)
+
     #for subdir in napm_path.iterdir():
     #    if subdir.is_dir():
     #        subdir = str(subdir.resolve())
