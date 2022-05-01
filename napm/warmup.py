@@ -3,14 +3,15 @@ import sys
 
 from loguru import logger
 
-from .pseudo_install import resolve_napm_path 
+from .pseudo_install import resolve_napm_path
 from .config import NapmConfig
 
 def populate_pythonpaths(
     env_name=None,
 ):
     """
-    If packages have been previously "installed" with napm, this will add the "install" directories to the python path.
+    If packages have been previously "installed" with napm, this will add the "install" directories
+    to the python path.
     """
     napm_paths = []
     napm_path = Path(resolve_napm_path())
