@@ -19,3 +19,21 @@ def test_pseudoinstall_git_repo_subdir():
     reload(napm)
     import SLIP
     from SLIP.models import SLIP_VITB16, SLIP, SLIP_VITL16
+
+def test_pseudoinstall_git_repo_subdir_populate_pythonpaths():
+    import napm
+    url = "https://github.com/facebookresearch/SLIP"
+    napm.pseudoinstall_git_repo(url, add_install_dir_to_path=True)
+    napm.populate_pythonpaths()
+    import SLIP
+    from SLIP.models import SLIP_VITB16, SLIP, SLIP_VITL16
+
+def test_pseudo_install_into_env():
+    import napm
+    url = "https://github.com/FreddeFrallan/Multilingual-CLIP"
+    napm.pseudoinstall_git_repo(url, env_name="multilingual_clip", add_install_dir_to_path=True)
+    napm.populate_pythonpaths(env_name="multilingual_clip")
+    import src
+    from src import multilingual_clip
+    #text_model = multilingual_clip.load_model('M-BERT-Distil-40')
+    
