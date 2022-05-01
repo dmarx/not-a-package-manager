@@ -31,11 +31,5 @@ def populate_pythonpaths(
         if path not in sys.path:
             sys.path.append(path)
 
-    #for subdir in napm_path.iterdir():
-    #    if subdir.is_dir():
-    #        subdir = str(subdir.resolve())
-    #        logger.debug(subdir)
-    #        sys.path.append(subdir)
-
 if __name__ == "__main__":
     populate_pythonpaths()
