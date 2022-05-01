@@ -42,10 +42,10 @@ def resolve_napm_path(env_name=None) -> str:
     # Todo: after first resolve, persist this to a config file or something like that and load from there. 
     napm_path = os.environ.get('NAPM_PATH')
     if napm_path is None:
-        cache_dir = Path.home() / '.cache'
+        cache_dir = Path.home() / '.cache' / 'napm' 
         if env_name:
             cache_dir = cache_dir / '_envs' / env_name
-        napm_path = (cache_dir / 'napm').resolve()
+        napm_path = (cache_dir).resolve()
         napm_path.mkdir(parents=True, exist_ok=True)
     napm_path = str(napm_path)
     if napm_path not in sys.path:
