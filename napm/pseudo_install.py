@@ -9,11 +9,11 @@ import sys
 from .utils import gitclone, resolve_napm_path
 from .config import NapmConfig
 
-def make_install_dir(dirname) -> str:
+def make_install_dir(dirname, env_name=None) -> str:
     """
     Creates the directory into which the package will be "installed".
     """
-    parent = resolve_napm_path()
+    parent = resolve_napm_path(env_name=env_name)
     install_dir = Path(parent) / dirname
     if not install_dir.exists():
         install_dir.mkdir(parents=True)
@@ -45,7 +45,7 @@ def pseudoinstall_git_repo(
     if not package_name:
         package_name = package_url.split('/')[-1]
     if not install_dir:
-        install_dir = make_install_dir(package_name)
+        install_dir = make_install_dir(package_name, env_name=env_name)
     
     gitclone(package_url, install_dir)
 
