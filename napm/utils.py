@@ -7,6 +7,7 @@ import sys
 
 from loguru import logger
 
+
 # should we use an SDK for this instead? Maybe https://gitpython.readthedocs.io/en/stable/tutorial.html ?
 def gitclone(
     repo_url, 
@@ -19,8 +20,19 @@ def gitclone(
     #cmd += [url, tgt_dir]
     cmd = ['git', 'clone', repo_url, tgt_dir]
     res = subprocess.run(cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
-    logger.debug(res)
+    #logger.debug(res)
 
+
+def gitupdate(
+    install_dir,
+):
+    """
+    Updates a git repo.
+    """
+    # https://git-scm.com/docs/git#Documentation/git.txt--Cltpathgt
+    logger.debug(f'attempting to invoke git pull on {install_dir}')
+    cmd = ['git','-C',install_dir, 'pull', 'origin']
+    res = subprocess.run(cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
 
 
 #install_dir = Path(__path__)
