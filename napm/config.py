@@ -58,6 +58,7 @@ class NapmConfig:
         package_name, 
         install_dir,
         add_install_dir_to_path=False,
+        auto_update=False,
     ):
         """
         Adds a package to the config file.
@@ -66,6 +67,7 @@ class NapmConfig:
         config.packages[package_name] = {
             'install_dir': install_dir, 
             'add_install_dir_to_path': add_install_dir_to_path,
+            'automated_update': auto_update,
             }
         #config.packages[package_name]['install_dir'] = install_dir
         self.update_config(config)

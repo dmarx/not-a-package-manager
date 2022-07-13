@@ -5,6 +5,8 @@ from loguru import logger
 
 from .pseudo_install import resolve_napm_path
 from .config import NapmConfig
+from .update import effect_automated_updates
+
 
 def populate_pythonpaths(
     env_name=None,
@@ -20,6 +22,7 @@ def populate_pythonpaths(
         env_path = napm_path / env_name
         napm_paths.append(env_path)
 
+    effect_automated_updates(env_name=env_name)
     config = NapmConfig(env_name=env_name).load()
     for package_name, package_meta in config.packages.items():
         if package_meta.add_install_dir_to_path:
@@ -31,6 +34,7 @@ def populate_pythonpaths(
             path = str(path.resolve())
         if path not in sys.path:
             sys.path.append(path)
+
 
 if __name__ == "__main__":
     populate_pythonpaths()
