@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "napm"
-version = "0.2.1"
+version = "0.2.2"
 description = "Not A Package Manager."
 authors = ["David Marx <david.marx84@gmail.com>"]
 license = "MIT"
