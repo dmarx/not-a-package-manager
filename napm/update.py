@@ -4,6 +4,7 @@ from .pseudo_install import resolve_napm_path, pseudoinstall_git_repo
 from .utils import gitclone, gitupdate, resolve_napm_path
 from .config import NapmConfig
 
+
 def set_autoupdate_flag(
     package_name,
     env_name=None,
@@ -49,7 +50,7 @@ def effect_automated_updates(
     this will "update" the "packages" by attempting a git pull.
     """
     config = NapmConfig(env_name=env_name).load()
-    for package_name, package_meta in config.packages.items(): # not sure if I can iterate cfg like this (codex)
+    for package_name, package_meta in config.packages.items():
         if package_meta.get('automated_update'):
             update_package(package_name, env_name=env_name)
 
@@ -61,11 +62,5 @@ def update_environment(
     Updates all "packages" that have been "installed" into the specified "environment".
     """
     config = NapmConfig(env_name=env_name).load()
-    for package_name, package_meta in config.packages.items(): # not sure if I can iterate cfg like this (codex)
+    for package_name, package_meta in config.packages.items():
         update_package(package_name, env_name=env_name)
-
-# TO do: add an "auto-update" optional setting 
-# to the config entry and pseudoinstall_git_repo function
-
-# to do
-
