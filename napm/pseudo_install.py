@@ -29,6 +29,7 @@ def pseudoinstall_git_repo(
     package_name=None,
     add_install_dir_to_path=False,
     env_name=None,
+    auto_update=False,
     ):
     """
     Clones a git repo, adds the install dir to `sys.path` if necessary, and
@@ -40,6 +41,7 @@ def pseudoinstall_git_repo(
     :param package_name: the name of the package you want to install
     :param add_install_dir_to_path: If the package is not found in the install dir, add the install dir
     to sys.path, defaults to False (optional)
+    :param auto_update: If true, will always attempt a git pull prior to loading module
     """
     install_successful = False
     if not package_name:
@@ -71,4 +73,9 @@ def pseudoinstall_git_repo(
     
     if install_successful:
         config = NapmConfig(env_name=env_name)
-        config.add_package(package_name, install_dir, add_install_dir_to_path)
+        config.add_package(
+            package_name=package_name,
+            install_dir=install_dir,
+            add_install_dir_to_path=add_install_dir_to_path,
+            auto_update=auto_update,
+        )
