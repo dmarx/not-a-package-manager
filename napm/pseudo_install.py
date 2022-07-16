@@ -56,7 +56,7 @@ def pseudoinstall_git_repo(
         importlib.import_module(package_name)
         install_successful = True
     except ImportError as e:
-        logger.error(f'{package_name} failed to import from dapm install dir')
+        logger.error(f'{package_name} failed to import from napm install dir')
         add_install_dir_to_path = True
 
     if add_install_dir_to_path:
