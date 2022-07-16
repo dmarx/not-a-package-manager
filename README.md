@@ -9,6 +9,8 @@ utilities to facilitate working with codebases that don't ascribe to normal pack
 
 # Usage
 
+## "Installing" packages
+
 To "install" a codebase from a git repo:
 
     import napm
@@ -31,6 +33,31 @@ The default behavior is to not add the root dir of the git repo to the PYTHON_PA
 
     import SLIP
     from SLIP.models import SLIP_VITB16, SLIP, SLIP_VITL16
+
+## Updating packages
+
+    napm.update_package('package_name')
+
+Under the hood, updating a package is just a call to 'git pull'.
+
+If you want, you can set napm to fetch the most recent version of the repository
+automatically prior to attempting to import it:
+
+    napm.pseudoinstall_git_repo(url, package_name='package_name', auto_update=True)
+
+This isn't advisable, but hey: if you're using napm at all, you're already shooting from the hip anyway.
+If you change your mind and decide that was a bad idea, you can always turn auto-update off again:
+
+    napm.set_autoupdate_flag(package_name='package_name', value=False)
+
+
+## Removing packages
+
+    napm.remove_package('package_name', env_name='my_env')
+
+To flush a whole 'environment' (e.g. as part of an uninstall sequence):
+
+    napm.remove_env(env_name='my_env')
 
 # Who is this for?
 
