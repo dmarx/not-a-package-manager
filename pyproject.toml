@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "napm"
-version = "1.0.0"
+version = "1.0.1"
 description = "Not A Package Manager."
 authors = ["David Marx <david.marx84@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.7"
 requests = "^2.27.1"
 gdown = "^4.4.0"
 omegaconf = "^2.1.1"
