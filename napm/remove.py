@@ -9,7 +9,7 @@ from .config import NapmConfig
 
 
 def remove_package(
-    package,
+    package_name,
     env_name=None,
     config_path=None,
 ):
@@ -17,14 +17,14 @@ def remove_package(
     Updates (git pull) the specified "package" in the specified "environment".
     """
     # this chunk is lifted from update_package.py, maybe I could abstract with a decorator?
-    logger.debug(package)
+    logger.debug(package_name)
     config = NapmConfig(env_name=env_name, config_path=config_path)
     config = config.load()
-    if package in config['packages']:
-        install_dir = config['packages'][package]['install_dir']
+    if package_name in config['packages']:
+        install_dir = config['packages'][package_name]['install_dir']
         install_dir = pathlib.Path(install_dir)
         shutil.rmtree(install_dir)
-        del config['packages'][package]
+        del config['packages'][package_name]
     else:
         raise ValueError("Package not found in config.")
     ### uncomment this after we add some safety checks or maybe make it optional, feels unsafe.
@@ -48,7 +48,7 @@ def remove_env(
     config = config.load()
     for package in config['packages']:
         remove_package(
-            package=package,
+            package_name=package,
             env_name=env_name,
             config_path=config_path,
         )
