@@ -30,6 +30,7 @@ def pseudoinstall_git_repo(
     add_install_dir_to_path=False,
     env_name=None,
     auto_update=False,
+    target_paths=[],
     ):
     """
     Clones a git repo, adds the install dir to `sys.path` if necessary, and
@@ -78,4 +79,5 @@ def pseudoinstall_git_repo(
             install_dir=install_dir,
             add_install_dir_to_path=add_install_dir_to_path,
             auto_update=auto_update,
+            target_paths=target_paths,
         )
