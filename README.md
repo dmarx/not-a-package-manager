@@ -3,6 +3,8 @@ utilities to facilitate working with codebases that don't ascribe to normal pack
 
 **DISCLAIMER:** This tool encapsulates what could be considered "best practices" for... bad practices. Simply invoking this package should probably be considered a code smell and shouldn't come anywhere near production code.
 
+
+
 # Installation
 
     pip install napm
@@ -93,3 +95,6 @@ to any python environment into which napm is installed.
     !cd not-a-package-manager; git pull origin; poetry build
     !pip uninstall -y napm; pip install not-a-package-manager/dist/napm*.whl
 
+# Related projects
+
+* https://github.com/fatiando/pooch
