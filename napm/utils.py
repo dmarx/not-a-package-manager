@@ -8,7 +8,7 @@ import sys
 from loguru import logger
 
 #from napm.config import NapmConfig
-from .config import NapmConfig
+#from .config import NapmConfig
 
 
 # should we use an SDK for this instead? Maybe https://gitpython.readthedocs.io/en/stable/tutorial.html ?
@@ -46,6 +46,7 @@ def gitupdate(
 
     
 def install_requirements(package_name):
+    from .config import NapmConfig
     cfg = NapmConfig().load()
     root = Path(cfg.packages[package_name].install_dir)
     reqs_path = (root /'requirements.txt')
