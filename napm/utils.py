@@ -15,7 +15,8 @@ from .config import NapmConfig
 def gitclone(
     repo_url, 
     tgt_dir,
-    recurse_submodules=True
+    recurse_submodules=True,
+    branch=None,
     ):
     """
     Alias for calling git clone.
@@ -23,6 +24,8 @@ def gitclone(
     #cmd = ['git', 'clone']
     #cmd += [url, tgt_dir]
     cmd = ['git', 'clone']
+    if branch is not None:
+        cmd += ['--branch',branch]
     if recurse_submodules:
         cmd += ['--recurse-submodules']
     cmd += [repo_url, tgt_dir]
