@@ -30,6 +30,9 @@ def pseudoinstall_git_repo(
     add_install_dir_to_path=False,
     env_name=None,
     auto_update=False,
+    ########
+    recurse_submodules=True,
+    branch=None,
     ):
     """
     Clones a git repo, adds the install dir to `sys.path` if necessary, and
@@ -49,7 +52,12 @@ def pseudoinstall_git_repo(
     if not install_dir:
         install_dir = make_install_dir(package_name, env_name=env_name)
     
-    gitclone(package_url, install_dir)
+    gitclone(
+        repo_url=package_url,
+        tgt_dir=install_dir,
+        recurse_submodules=recurse_submodules,
+        branch=branch,
+    )
 
     # test install was successful
     try:
