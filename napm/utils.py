@@ -15,13 +15,17 @@ from .config import NapmConfig
 def gitclone(
     repo_url, 
     tgt_dir,
+    recurse_submodules=True
     ):
     """
     Alias for calling git clone.
     """
     #cmd = ['git', 'clone']
     #cmd += [url, tgt_dir]
-    cmd = ['git', 'clone', repo_url, tgt_dir]
+    cmd = ['git', 'clone']
+    if recurse_submodules:
+        cmd += ['--recurse-submodules']
+    cmd += [repo_url, tgt_dir]
     res = subprocess.run(cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
     #logger.debug(res)
 
