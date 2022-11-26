@@ -7,6 +7,9 @@ import sys
 
 from loguru import logger
 
+#from napm.config import NapmConfig
+from .config import NapmConfig
+
 
 # should we use an SDK for this instead? Maybe https://gitpython.readthedocs.io/en/stable/tutorial.html ?
 def gitclone(
@@ -34,6 +37,17 @@ def gitupdate(
     cmd = ['git','-C',install_dir, 'pull', 'origin']
     res = subprocess.run(cmd, stdout=subprocess.PIPE).stdout.decode('utf-8')
 
+    
+def install_requirements(package_name):
+    cfg = NapmConfig().load()
+    root = Path(cfg.packages[package_name].install_dir)
+    reqs_path = (root /'requirements.txt')
+    if reqs_path.exists():
+        retval = subprocess.run(
+            ['pip','install','-r',str(reqs_path.resolve())]
+            , stdout=subprocess.PIPE
+        ).stdout.decode('utf-8')
+    return retval
 
 #install_dir = Path(__path__)
 #local_path = Path.cwd() 
