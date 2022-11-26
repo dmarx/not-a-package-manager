@@ -71,3 +71,17 @@ def test_pseudo_install_into_env():
     napm.pseudoinstall_git_repo(url, env_name='test_env')
     napm.populate_pythonpaths(env_name="test_env")
     import napm_test
+
+
+def test_pseudoinstall_git_repo_addl_targets():
+    import napm
+    #url = "https://github.com/dmarx/napm_test"
+    url = 'https://github.com/princeton-vl/RAFT'
+
+    napm.pseudoinstall_git_repo(
+        package_url=url,
+        target_paths='core',
+        add_install_dir_to_path=True,
+        package_name='flow_net',
+    )
+    from flow_net.core.raft import RAFT
